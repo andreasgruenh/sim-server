@@ -1,13 +1,12 @@
-import IocContainer from '../framework/my-ioc/IocContainer'
+import 'reflect-metadata';
 
-class Test {
-  public id() {
-    console.log('Its me!')
-  }
-}
+import { Test4, Test5, Test5Factory, test6 } from './Classes';
+import MainModule from './MainModule';
 
-const container = new IocContainer()
-container.bind<Test>(Test)
+const container = new MainModule().getContainer();
 
-const test = container.get<Test>(Test)
-test.id()
+container.get<Test4>(Test4);
+
+container.get<Test5Factory>(Test5)(10, 'hello');
+
+console.log(container.get('test6') === test6);

@@ -1,13 +1,16 @@
 {
   "defaultSeverity": "error",
   "extends": [
-      "tslint:recommended",
-      "tslint-eslint-rules"
+    "tslint:recommended",
+    "tslint-eslint-rules"
   ],
   "jsRules": {},
   "rules": {
-      "semicolon": [true, "never"],
-      "quotemark": [true, "single"]
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "max-classes-per-file": false,
+    "quotemark": [true, "single"],
+    "semicolon": [true, "always"],
+    "curly": [true, "ignore-same-line"]
   },
   "rulesDirectory": []
 }

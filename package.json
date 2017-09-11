@@ -10,9 +10,13 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@types/lodash": "^4.14.74",
+    "lodash": "^4.17.4",
+    "reflect-metadata": "^0.1.10"
+  },
   "devDependencies": {
-    "@types/es6-shim": "^0.31.35",
+    "@types/reflect-metadata": "0.0.5",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
