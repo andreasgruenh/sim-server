@@ -1,5 +1,5 @@
 {
-  "name": "my-ioc",
+  "name": "sim-server",
   "version": "0.0.1",
   "description": "Simple IOC Container for front and backend",
   "main": "index.js",
