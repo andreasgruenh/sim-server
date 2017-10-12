@@ -7,10 +7,10 @@ import { getDependencyDescriptors, setDependencyDescriptors } from './Metadata';
  * dependencies.
  * @param {Identifier} identifier for the bound {@link Provider}.
  */
-export default function inject(identifier: Identifier) {
+export default function injectAll(identifier: Identifier) {
   return function addInjectionProperties(target: any, member: any, index: number) {
     const descriptors = getDependencyDescriptors(target);
-    descriptors[index] = new DependencyDescriptor(identifier, 'SINGLE');
+    descriptors[index] = new DependencyDescriptor(identifier, 'COLLECTION');
     setDependencyDescriptors(descriptors, target);
   };
 }

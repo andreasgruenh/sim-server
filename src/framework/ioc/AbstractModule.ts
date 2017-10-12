@@ -9,8 +9,8 @@ import LifecycleStrategySelector from './provider/LifecycleStrategySelector';
  * Extend this class to bind your classes to the IOC Container.
  * Call Module#getContainer to receive an initialized container that can resolve dependencies.
  */
-export default abstract class Module implements IContainer {
-  private providersByIdentifier = new Map<Identifier, DependencyProvider<any>>();
+export default abstract class AbstractModule implements IContainer {
+  private providersByIdentifier = new Map<Identifier, Array<DependencyProvider<any>>>();
 
   constructor() {
     this.configure();
@@ -40,16 +40,22 @@ export default abstract class Module implements IContainer {
    * @param identifier Provided identifier for the bound provider.
    */
   public get<T>(identifier: Identifier): T {
-    const factory = this.providersByIdentifier.get(identifier);
-    if (!factory) throw new Error(`Nothing bound to the identifier ${identifier}`);
-    return factory.get();
+    const [provider] = this.providersByIdentifier.get(identifier) || [undefined];
+    if (!provider) throw new Error(`Nothing bound to the identifier ${identifier.toString()}`);
+    return provider.get();
+  }
+
+  public getAll<T>(identifier: Identifier): T[] {
+    const providers = this.providersByIdentifier.get(identifier);
+    if (!providers) throw new Error(`Nothing bound to the identifier ${identifier}`);
+    return providers.map(p => p.get());
   }
 
   /**
    * Loads all bindings from the given module.
    * @param module Instance of a configured module.
    */
-  protected loadModule(module: Module): void {
+  protected loadModule(module: AbstractModule): void {
     for (const [identifier, provider] of module.providers()) {
       this.registerProvider(identifier, provider);
     }
@@ -70,9 +76,16 @@ export default abstract class Module implements IContainer {
     return factorySelector;
   }
 
-  private providers() { return this.providersByIdentifier.entries(); }
+  private *providers(): IterableIterator<[Identifier, DependencyProvider<any>]> {
+    for (const [identifier, providers] of this.providersByIdentifier.entries()) {
+      for (const provider of providers) {
+        yield [identifier, provider];
+      }
+    }
+  }
 
   private registerProvider(identifier: Identifier, provider: DependencyProvider<any>) {
-    this.providersByIdentifier.set(identifier, provider);
+    if (!this.providersByIdentifier.has(identifier)) this.providersByIdentifier.set(identifier, []);
+    this.providersByIdentifier.get(identifier).unshift(provider);
   }
 }

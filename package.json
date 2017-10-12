@@ -11,12 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/lodash": "^4.14.74",
     "lodash": "^4.17.4",
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "ws": "^3.1.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.77",
     "@types/reflect-metadata": "0.0.5",
+    "@types/ws": "^3.0.2",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -26,6 +28,7 @@
     "eslint-plugin-react": "^7.1.0",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.5.2"
+    "typescript": "^2.5.2",
+    "typesync": "^0.2.5"
   }
 }

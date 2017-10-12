@@ -9,4 +9,10 @@ export default interface IContainer {
    * @param identifier that was used to bind.
    */
   get<T>(identifier: Identifier): T;
+
+  /**
+   * Returns an array of instances for the identifier.
+   * @param identifier that was used to bind.
+   */
+  getAll<T>(identifier: Identifier): T[];
 }

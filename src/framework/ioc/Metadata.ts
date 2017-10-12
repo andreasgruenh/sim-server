@@ -1,9 +1,10 @@
+import DependencyDescriptor from './DependencyDescriptor';
 import Identifier from './Identifier';
 
 const METADATA_KEY = 'inject';
 
-export const getIdentifiers: (target: any) => Identifier[] =
+export const getDependencyDescriptors: (target: any) => DependencyDescriptor[] =
   (target: any) => Reflect.getMetadata(METADATA_KEY, target) || [];
 
-export const setIdentifiers: (identifiers: Identifier[], target: any) => void =
-  (identifiers, target) => Reflect.defineMetadata(METADATA_KEY, identifiers, target);
+export const setDependencyDescriptors: (descriptors: DependencyDescriptor[], target: any) => void =
+  (descriptors, target) => Reflect.defineMetadata(METADATA_KEY, descriptors, target);

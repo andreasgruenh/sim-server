@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import Identifier from '../Identifier';
 import INewable from '../INewable';
-import { getIdentifiers } from '../Metadata';
+import { getDependencyDescriptors } from '../Metadata';
 import LifecycleStrategySelector from '../provider/LifecycleStrategySelector';
 import ClassDependencyFactory from './ClassDependencyFactory';
 import DependencyFactory from './DependencyFactory';
@@ -43,7 +43,7 @@ export default class FactorySelector {
       throw new Error('You can only bind functions to a class.\nWhen binding ' + type);
     }
     const argumentCount = type.length;
-    const dependencyCount = getIdentifiers(type).length;
+    const dependencyCount = getDependencyDescriptors(type).length;
     if (argumentCount !== dependencyCount) {
       throw new Error(
         type +

@@ -1,5 +1,5 @@
 import INewable from '../INewable';
-import { getIdentifiers } from '../Metadata';
+import { getDependencyDescriptors } from '../Metadata';
 import DependencyFactory from './DependencyFactory';
 
 /**
@@ -18,8 +18,8 @@ export default class ClassDependencyFactory<T> extends DependencyFactory<T> {
    * @return {T} New value with resolved dependencies.
    */
   public create() {
-    const identifiers = getIdentifiers(this.type);
-    const dependencies = identifiers.map(identifier => this.container.get(identifier));
+    const descriptors = getDependencyDescriptors(this.type);
+    const dependencies = descriptors.map(descriptor => descriptor.resolve(this.container));
     return new this.type(...dependencies);
   }
 }
